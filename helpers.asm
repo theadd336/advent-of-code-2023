@@ -64,6 +64,32 @@ int_to_ascii:
     pop rdi
     ret
 
+; Opens a file with the following values
+; Inputs: 
+; rdi - dirfd (use -100 for current working dir)
+; rsi - pathname (name of the file)
+; Outputs: 
+; rax - < 0 on error, file descriptor on success
+global open_file
+open_file:
+    mov rax, 257 ; 257 is syscall for openat
+    xor rdx, rdx ; No flags (read only mode)
+    xor r10, r10 ; Default mode
+    syscall
+    ret
+
+; Reads some bytes from an open file descriptor
+; Inputs: 
+; rdi - file descriptor
+; rsi - pointer to the buffer to write
+; rdx - size of the buffer to write
+; Outputs:
+; rax - bytes read (0 if file is finished) 
+global read_bytes
+read_bytes:
+    mov rax, 0 ; 0 is sys_read
+    syscall
+    ret
 
 ; Exits with the return code specified in rsi
 global exit

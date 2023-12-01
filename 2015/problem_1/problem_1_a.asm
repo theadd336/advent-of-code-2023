@@ -4,7 +4,7 @@ extern exit
 
 section .rodata
 increment_paren:
-    db '('
+    db "("
 decrement_parent:
     db ")"
 input_string:
