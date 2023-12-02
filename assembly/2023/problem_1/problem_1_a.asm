@@ -9,7 +9,7 @@ input_string:
     db "1abc2pqr3stu8vwx"
     input_string_len equ $ - input_string
 input_file:
-    db "2023/problem_1/input.txt", 0
+    db "assembly/2023/problem_1/input.txt", 0
 
 section .bss
 answer: resq 2
