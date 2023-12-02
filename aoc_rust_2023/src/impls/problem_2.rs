@@ -33,7 +33,7 @@ impl CubeResults {
                 }
                 if expect_color {
                     match piece {
-                        "blue" => color_to_increment = &mut self.blue,
+                        "blue" => (),
                         "green" => color_to_increment = &mut self.green,
                         "red" => color_to_increment = &mut self.red,
                         _ => anyhow::bail!("Expected a color, but piece: {piece} is not a color"),
