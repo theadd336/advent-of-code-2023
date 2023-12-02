@@ -5,9 +5,6 @@ extern open_file
 extern read_bytes
 
 section .rodata
-input_string:
-    db "1abc2pqr3stu8vwx"
-    input_string_len equ $ - input_string
 input_file:
     db "assembly/2023/problem_1/input.txt", 0
 
@@ -33,7 +30,6 @@ _start:
 
     xor r8, r8 ; Store the last number of the line
     xor rbx, rbx ; 0 rbx
-    mov rcx, input_string ; move the input string pointer to rcx
     xor r14, r14 ; 0 r14 for initial loop
     xor r10, r10 ; 0 r10 to store the boolean for if we've seen two numbers or not
     xor r12, r12 ; r12 will store the total answer
@@ -48,17 +44,17 @@ _loop_over_string:
     je _handle_line_end
     sub r13b, '0' ; Subtract the offset for 0 from the byte 
     cmp r13b, 10 ; Check if the value is a number
-    jge _increment_string_pointer ; If a letter, continue
+    jge _loop_over_string ; If a letter, continue
     cmp r10, 1 ; Check if we are on the first or second value
     je _store_second_number ; If second, jump to _add the second number and handle that
     inc r10 ; Otherwise, increment r10 for the first number
     mov r14b, r13b ; Move the value from r13b into r14b (first number)
     mov r8b, r13b ; Save off the first number as the second in case there is only one number
-    jmp _increment_string_pointer
+    jmp _loop_over_string
 
 _store_second_number:
     mov r8b, r13b ; Update the new second number on the line
-    jmp _increment_string_pointer
+    jmp _loop_over_string
 
 _handle_line_end:
     imul r14, 10 ; Multiply r14 by 10 and store to r14
@@ -67,10 +63,6 @@ _handle_line_end:
     xor r14, r14 ; Reset r14
     xor r10, r10 ; Reset r10
     xor r8, r8
-    jmp _increment_string_pointer
-
-_increment_string_pointer:
-    inc rcx
     jmp _loop_over_string
     
 _print_answer:
