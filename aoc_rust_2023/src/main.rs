@@ -63,6 +63,7 @@ fn main() -> Result<(), u8> {
     };
     let result = match args.problem {
         1 => impls::problem_1::solve(part, lines),
+        2 => impls::problem_2::solve(part, lines),
         _ => return Err(255),
     };
     match result {
