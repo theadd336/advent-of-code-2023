@@ -38,7 +38,7 @@ impl Board {
             let mut start_span = [line_index, 0];
             let mut num_substr = Vec::new();
             for (char_index, c) in line.chars().enumerate() {
-                if eval_num && c.is_digit(10) {
+                if eval_num && c.is_ascii_digit() {
                     num_substr.push(c);
                 } else if eval_num {
                     eval_num = false;
@@ -57,9 +57,9 @@ impl Board {
                     if c != '.' {
                         self.symbol_positions.insert((line_index, char_index));
                     }
-                } else if !eval_num && c != '.' && !c.is_digit(10) {
+                } else if !eval_num && c != '.' && !c.is_ascii_digit() {
                     self.symbol_positions.insert((line_index, char_index));
-                } else if !eval_num && c != '.' && c.is_digit(10) {
+                } else if !eval_num && c != '.' && c.is_ascii_digit() {
                     eval_num = true;
                     start_span[1] = char_index;
                     num_substr.push(c);
