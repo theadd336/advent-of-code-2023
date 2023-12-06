@@ -173,7 +173,7 @@ impl ALotOfMaps {
 }
 
 fn create_seed_list(seed_line: &str, seeds_as_ranges: bool) -> AocResult<Vec<u64>> {
-    let mut seeds = Vec::with_capacity(1_000_000_000);
+    let mut seeds = Vec::new();
     let mut scratch_seed: Option<u64> = None;
     for num_str in seed_line.split(' ') {
         if num_str == "seeds:" {

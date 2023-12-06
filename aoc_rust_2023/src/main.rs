@@ -67,6 +67,7 @@ fn main() -> Result<(), u8> {
         3 => impls::problem_3::solve(part, lines),
         4 => impls::problem_4::solve(part, lines),
         5 => impls::problem_5::solve(part, lines),
+        6 => impls::problem_6::solve(part, lines),
         _ => return Err(255),
     };
     match result {
